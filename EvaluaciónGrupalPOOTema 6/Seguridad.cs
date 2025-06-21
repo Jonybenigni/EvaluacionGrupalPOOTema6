@@ -10,17 +10,17 @@ namespace EvaluaciónGrupalPOOTema_6
     {
         public bool TieneArma { get; set; }
 
-        public int AdicionalUsoArma { get; set; } = 1000;
+        public int AdicionalUsoArma { get; set; } = 10000;
 
-        public Seguridad(string legajo, string nombre, double antiguedad, DateTime fechaIngreso, double sueldoBase) : base(legajo, nombre, antiguedad, fechaIngreso, sueldoBase)
+        public Seguridad(string legajo, string nombre, double antiguedad, DateTime fechaIngreso, double sueldoBase, bool tieneArma) : base(legajo, nombre, antiguedad, fechaIngreso, sueldoBase)
         {
 
-
+            TieneArma = tieneArma;
 
 
         }
 
-        public new double CalcularSueldo()
+        public override double CalcularSueldo()
         {
             double sueldo = base.CalcularSueldo();
             if (TieneArma==true)

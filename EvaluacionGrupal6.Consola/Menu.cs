@@ -1,6 +1,8 @@
 ﻿using EvaluacionGrupal6.Datos;
+using EvaluacionGrupal6.Utilidades;
 using EvaluaciónGrupalPOOTema_6;
 using System.ComponentModel.DataAnnotations;
+
 
 namespace EvaluacionGrupal6.Consola
 {
@@ -27,6 +29,7 @@ namespace EvaluacionGrupal6.Consola
                 Console.WriteLine("7. Mostrar solo Supervisores");
                 Console.WriteLine("8. Mostrar solo Operarios");
                 Console.WriteLine("9. Listar Operarios por turno");
+                Console.WriteLine("10. Mostrar estadísticas de los Empleados");
                 Console.WriteLine("0. Salir");
                 Console.Write("Opción: ");
                 opcion = int.Parse(Console.ReadLine());
@@ -42,6 +45,7 @@ namespace EvaluacionGrupal6.Consola
                     case 7: MostrarPorTipo(typeof(Supervisor)); break;
                     case 8: MostrarPorTipo(typeof(Operario)); break;
                     case 9: MostrarOperariosPorTurno(); break;
+                    case 10: MostrarEstadisticas(); break;
                 }
 
                 Console.WriteLine("\nPresione una tecla para continuar...");
@@ -51,7 +55,7 @@ namespace EvaluacionGrupal6.Consola
 
         static void CargarPersonalInicial()
         {
-            Empleado s1 = new Seguridad("DO123", "Carlos Gómez", 10, new DateTime(2010, 5, 1), 70000);
+            Empleado s1 = new Seguridad("DO123", "Carlos Gómez", 10, new DateTime(2010, 5, 1), 70000, true);
             Empleado s2 = new Supervisor("DR456", "Laura Suárez", Supervisor.AreaEnum.Personal, 15, new DateTime(2005, 3, 10), 7000);
             Empleado s3 = new Operario("OP789", "Luis López", Operario.TurnoEnum.Noche, Operario.AdicionalTurnoEnum.Noche, 8, new DateTime(2015, 9, 20), 60000);
 
@@ -96,7 +100,9 @@ namespace EvaluacionGrupal6.Consola
             switch (tipo)
             {
                 case 1:
-                    nuevo = new Seguridad(legajo, nombre, antiguedad, fechaIngreso, sueldoBase);
+                    Console.Write("¿Usa arma? (s/n): ");
+                    bool usaArma = Console.ReadLine().Trim().ToLower() == "s";
+                    nuevo = new Seguridad(legajo, nombre, antiguedad, fechaIngreso, sueldoBase, usaArma);
                     break;
                 case 2:
                     Console.WriteLine("Seleccione área: 0-Personal, 1-Producción, 2-Mantenimiento");
@@ -235,7 +241,36 @@ namespace EvaluacionGrupal6.Consola
 
         static void MostrarEmpleado(Empleado emp)
         {
-            Console.WriteLine($"[{emp.GetType().Name}] Legajo: {emp.Legajo}, Nombre: {emp.Nombre}, Sueldo: {emp.CalcularSueldo():C}");
+            Console.Write($"[{emp.GetType().Name}] Legajo: {emp.Legajo}, Nombre: {emp.Nombre}, Sueldo: {emp.CalcularSueldo():C}");
+
+            if (emp is Seguridad s)
+                Console.Write($", Usa arma: {(s.TieneArma ? "Sí" : "No")}");
+
+            Console.WriteLine();
+        }
+
+        static void MostrarEstadisticas()
+        {
+            ExtensionesConsola.Titulo("Estadísticas del Personal");
+
+            var lista = repoLinq.GetLista();
+
+            Console.WriteLine($"Promedio de sueldos: {UtilidadesPersonal.CalcularPromedioSueldos(lista):C}");
+
+            var mayorAnt = UtilidadesPersonal.ObtenerConMayorAntiguedad(lista);
+            if (mayorAnt != null)
+                Console.WriteLine($"Empleado con mayor antigüedad: {mayorAnt.Nombre} ({mayorAnt.Antiguedad} años)");
+
+            Console.WriteLine($"Cantidad que usan arma: {UtilidadesPersonal.CantidadConArma(lista)}");
+
+            Console.WriteLine("Cantidad por turno:");
+            var turnos = UtilidadesPersonal.CantidadPorTurno(lista);
+            foreach (var kvp in turnos)
+            {
+                Console.WriteLine($"- {kvp.Key}: {kvp.Value}");
+            }
+
+            ExtensionesConsola.Separador();
         }
 
     }
