@@ -13,7 +13,7 @@ namespace EvaluaciónGrupalPOOTema_6
 
         public double SueldoBase { get; set; }
 
-        public readonly double Antiguedad;
+        public  double Antiguedad;
 
         public Empleado(string legajo, string nombre, double antiguedad, DateTime fechaIngreso, double sueldoBase)
         {

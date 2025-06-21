@@ -25,7 +25,7 @@ namespace EvaluaciónGrupalPOOTema_6
         }
 
 
-        public Operario(int legajo, string nombre,TurnoEnum turno, AdicionalTurnoEnum adicionalTurno , double antiguedad, DateTime fechaIngreso, double sueldoBase) : base(legajo, nombre, antiguedad, fechaIngreso, sueldoBase)
+        public Operario(string legajo, string nombre,TurnoEnum turno, AdicionalTurnoEnum adicionalTurno , double antiguedad, DateTime fechaIngreso, double sueldoBase) : base(legajo, nombre, antiguedad, fechaIngreso, sueldoBase)
         {
 
             Turno = turno;

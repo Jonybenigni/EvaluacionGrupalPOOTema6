@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35818.85 d17.13
+VisualStudioVersion = 17.13.35818.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluaciónGrupal6.Entidades", "EvaluaciónGrupalPOOTema 6\EvaluaciónGrupal6.Entidades.csproj", "{D86E03FE-7B81-4445-999F-D13D0808CBBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluacionGrupal6.Consola", "EvaluacionGrupal6.Consola\EvaluacionGrupal6.Consola.csproj", "{AC750E4C-590A-4E92-A30E-86271EDF8389}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{D86E03FE-7B81-4445-999F-D13D0808CBBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D86E03FE-7B81-4445-999F-D13D0808CBBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D86E03FE-7B81-4445-999F-D13D0808CBBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC750E4C-590A-4E92-A30E-86271EDF8389}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC750E4C-590A-4E92-A30E-86271EDF8389}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC750E4C-590A-4E92-A30E-86271EDF8389}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC750E4C-590A-4E92-A30E-86271EDF8389}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
