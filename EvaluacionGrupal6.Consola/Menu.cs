@@ -6,8 +6,8 @@ namespace EvaluacionGrupal6.Consola
 {
     public class Menu
     {
-        static RepositorioEmpleadosLinq repo = new RepositorioEmpleadosLinq();
-
+        static RepositorioEmpleadosOperadores repoOperadores = new RepositorioEmpleadosOperadores();
+        static RepositorioEmpleadosLinq repoLinq = new RepositorioEmpleadosLinq();
 
         static void Main()
         {
@@ -51,9 +51,18 @@ namespace EvaluacionGrupal6.Consola
 
         static void CargarPersonalInicial()
         {
-            repo.Agregar(new Seguridad("DO123", "Carlos Gómez", 10, new DateTime(2010, 5, 1), 70000));
-            repo.Agregar(new Supervisor("DR456", "Laura Suárez", Supervisor.AreaEnum.Personal, 15, new DateTime(2005, 3, 10), 7000));
-            repo.Agregar(new Operario("OP789", "Luis López", Operario.TurnoEnum.Noche, Operario.AdicionalTurnoEnum.Noche, 8, new DateTime(2015, 9, 20), 60000));
+            Empleado s1 = new Seguridad("DO123", "Carlos Gómez", 10, new DateTime(2010, 5, 1), 70000);
+            Empleado s2 = new Supervisor("DR456", "Laura Suárez", Supervisor.AreaEnum.Personal, 15, new DateTime(2005, 3, 10), 7000);
+            Empleado s3 = new Operario("OP789", "Luis López", Operario.TurnoEnum.Noche, Operario.AdicionalTurnoEnum.Noche, 8, new DateTime(2015, 9, 20), 60000);
+
+            repoOperadores += s1;
+            repoOperadores += s2;
+            repoOperadores += s3;
+
+           
+            repoLinq.Agregar(s1);
+            repoLinq.Agregar(s2);
+            repoLinq.Agregar(s3);
         }
 
         static void AltaPersonal()
@@ -61,7 +70,7 @@ namespace EvaluacionGrupal6.Consola
             Console.Write("Ingrese legajo (ej: AB123): ");
             string legajo = Console.ReadLine().ToUpper();
 
-            if (repo.GetLista().Any(p => p.Legajo == legajo))
+            if (repoLinq.GetLista().Any(p => p.Legajo == legajo))
             {
                 Console.WriteLine("Ya existe un empleado con ese legajo.");
                 return;
@@ -82,7 +91,7 @@ namespace EvaluacionGrupal6.Consola
             Console.WriteLine("Tipo de empleado: 1-Seguridad, 2-Supervisor, 3-Operario");
             int tipo = int.Parse(Console.ReadLine());
 
-            Empleado nuevo = null;
+            Empleado nuevo = null!;
 
             switch (tipo)
             {
@@ -115,7 +124,8 @@ namespace EvaluacionGrupal6.Consola
                 }
                 else
                 {
-                    repo.Agregar(nuevo);
+                    repoOperadores += nuevo;
+                    repoLinq.Agregar(nuevo);
                     Console.WriteLine("Empleado agregado exitosamente.");
                 }
             }
@@ -126,14 +136,18 @@ namespace EvaluacionGrupal6.Consola
             Console.Write("Ingrese legajo a eliminar: ");
             string legajo = Console.ReadLine().ToUpper();
 
-            var emp = repo.GetLista().FirstOrDefault(p => p.Legajo == legajo);
+            
+            Empleado emp = repoOperadores[repoOperadores.MostrarIndicePorLegajo(legajo)];
             if (emp != null)
             {
-                repo.GetLista().Remove(emp);
+                repoOperadores -= legajo;
+                repoLinq.GetLista().RemoveAll(e => e.Legajo == legajo);
                 Console.WriteLine("Empleado eliminado.");
             }
             else
+            {
                 Console.WriteLine("Empleado no encontrado.");
+            }
         }
 
         static void ModificarPersonal()
@@ -141,7 +155,7 @@ namespace EvaluacionGrupal6.Consola
             Console.Write("Ingrese legajo a modificar: ");
             string legajo = Console.ReadLine().ToUpper();
 
-            var emp = repo.GetLista().FirstOrDefault(p => p.Legajo == legajo);
+            var emp = repoLinq.GetLista().FirstOrDefault(p => p.Legajo == legajo);
             if (emp != null)
             {
                 Console.Write("Nuevo nombre: ");
@@ -167,7 +181,7 @@ namespace EvaluacionGrupal6.Consola
             Console.Write("Ingrese legajo a buscar: ");
             string legajo = Console.ReadLine().ToUpper();
 
-            var emp = repo.GetLista().FirstOrDefault(p => p.Legajo == legajo);
+            var emp = repoLinq.GetLista().FirstOrDefault(p => p.Legajo == legajo);
             if (emp != null)
             {
                 MostrarEmpleado(emp);
@@ -180,13 +194,13 @@ namespace EvaluacionGrupal6.Consola
 
         static void ListarTodo()
         {
-            foreach (var emp in repo.GetLista())
+            foreach (var emp in repoLinq.GetLista())
                 MostrarEmpleado(emp);
         }
 
         static void MostrarPorTipo(Type tipo)
         {
-            var filtrados = repo.GetLista().Where(p => p.GetType() == tipo);
+            var filtrados = repoLinq.GetLista().Where(p => p.GetType() == tipo);
             foreach (var emp in filtrados)
                 MostrarEmpleado(emp);
         }
@@ -201,7 +215,7 @@ namespace EvaluacionGrupal6.Consola
                 Enum.IsDefined(typeof(Operario.TurnoEnum), turnoInt))
             {
                 var turno = (Operario.TurnoEnum)turnoInt;
-                var operarios = repo.ListarOperariosPorTurno(turno);
+                var operarios = repoLinq.ListarOperariosPorTurno(turno);
 
                 if (operarios.Any())
                 {
