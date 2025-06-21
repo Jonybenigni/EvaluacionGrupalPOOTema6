@@ -34,7 +34,7 @@ namespace EvaluaciónGrupalPOOTema_6
 
         }
 
-        public new double CalcularSueldo()
+        public override double CalcularSueldo()
         {
             return SueldoBase + (int)AdicionalTurno;
         }

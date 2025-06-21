@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluaciónGrupal6.Entidade
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluacionGrupal6.Consola", "EvaluacionGrupal6.Consola\EvaluacionGrupal6.Consola.csproj", "{AC750E4C-590A-4E92-A30E-86271EDF8389}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluacionGrupal6.Datos", "EvaluacionGrupal6.Datos\EvaluacionGrupal6.Datos.csproj", "{03FF3582-CA40-47D9-906F-2099F8577CA0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AC750E4C-590A-4E92-A30E-86271EDF8389}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC750E4C-590A-4E92-A30E-86271EDF8389}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC750E4C-590A-4E92-A30E-86271EDF8389}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03FF3582-CA40-47D9-906F-2099F8577CA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03FF3582-CA40-47D9-906F-2099F8577CA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03FF3582-CA40-47D9-906F-2099F8577CA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03FF3582-CA40-47D9-906F-2099F8577CA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

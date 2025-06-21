@@ -13,7 +13,7 @@ namespace EvaluaciónGrupalPOOTema_6
 
         public double SueldoBase { get; set; }
 
-        public  double Antiguedad;
+        public double Antiguedad;
 
         public Empleado(string legajo, string nombre, double antiguedad, DateTime fechaIngreso, double sueldoBase)
         {
@@ -30,14 +30,14 @@ namespace EvaluaciónGrupalPOOTema_6
             return antiguedad * 0.03; // Retorna el porcentaje de antigüedad
         }
 
-        public double CalcularSueldo()
+        public virtual double CalcularSueldo()
         {
             return SueldoBase;
         }
 
         public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            
+
             if (string.IsNullOrWhiteSpace(Legajo) || !Regex.IsMatch(Legajo, @"^[A-Za-z]{2}[0-9]{3}$"))
             {
                 yield return new ValidationResult("El legajo debe tener exactamente 2 letras seguidas de 3 números (ej. AB123).", new[] { nameof(Legajo) });
@@ -58,4 +58,4 @@ namespace EvaluaciónGrupalPOOTema_6
                 yield return new ValidationResult("La fecha de ingreso no puede ser superior a la fecha actual.", new[] { nameof(FechaIngreso) });
             }
         }
-    }  }
+    }   }  
