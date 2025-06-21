@@ -12,7 +12,7 @@ namespace EvaluaciónGrupalPOOTema_6
 
         public int AdicionalUsoArma { get; set; } = 1000;
 
-        public Seguridad(int legajo, string nombre, double antiguedad, DateTime fechaIngreso, double sueldoBase) : base(legajo, nombre, antiguedad, fechaIngreso, sueldoBase)
+        public Seguridad(string legajo, string nombre, double antiguedad, DateTime fechaIngreso, double sueldoBase) : base(legajo, nombre, antiguedad, fechaIngreso, sueldoBase)
         {
 
 

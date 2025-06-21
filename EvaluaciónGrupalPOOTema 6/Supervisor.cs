@@ -19,8 +19,9 @@ namespace EvaluaciónGrupalPOOTema_6
            Ventas
 
         }
+        
 
-        public Supervisor(int legajo, string nombre,AreaEnum area, double antiguedad, DateTime fechaIngreso, double sueldoBase) : base(legajo, nombre, antiguedad, fechaIngreso, sueldoBase)
+        public Supervisor(string legajo, string nombre,AreaEnum area, double antiguedad, DateTime fechaIngreso, double sueldoBase) : base(legajo, nombre, antiguedad, fechaIngreso, sueldoBase)
         {
 
             Area = area;
