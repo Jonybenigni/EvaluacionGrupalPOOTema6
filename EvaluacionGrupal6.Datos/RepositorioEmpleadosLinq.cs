@@ -4,28 +4,118 @@ namespace EvaluacionGrupal6.Datos
 {
     public class RepositorioEmpleadosLinq
     {
-        private List<Empleado> empleados=null!;
+        private List<Empleado> empleados = new();
+        
+        private readonly string ruta = null!;
 
 
-        public RepositorioEmpleadosLinq()
+        public RepositorioEmpleadosLinq(string rutaArchivo)
         {
-            empleados = new List<Empleado>();
+            ruta = rutaArchivo;
+            LeerDatos();
+        }
+
+        public List<Empleado> GetEmpleado()
+        {
+            return empleados.OrderBy(p => p.Nombre).ToList();
         }
 
         public List<Empleado> GetLista()
         {
             return empleados;
         }
-        public bool Agregar(Empleado empleado)
+
+        private void LeerDatos()
         {
-            if (Existe(empleado)) return false;
-            empleados.Add(empleado);
-            return true;
+            if (!File.Exists(ruta))
+            {
+                return;
+            }
+            var registros = File.ReadAllLines(ruta);
+            foreach (var registro in registros)
+            {
+                Empleado empleado = ConstruirEmpleado(registro);
+                empleados.Add(empleado);
+            }
+
         }
+
+        private Empleado ConstruirEmpleado(string registro)
+        {
+            var campos = registro.Split('|');
+            var empleadoId = int.Parse(campos[0]);
+            var nombreEmpleado = campos[1];
+            return new Empleado()
+            {
+                Nombre = nombreEmpleado,
+                EmpleadoId = empleadoId,
+            };
+        }
+
+        private int SetearEmpleadoId()
+        {
+            return empleados.Max(p => p.EmpleadoId) + 1;
+        }
+
         public bool Existe(Empleado empleado)
         {
-            return empleados.Contains(empleado);
+            return empleado.EmpleadoId == 0 ? empleados.Any(p => p.Nombre == empleado.Nombre) :
+                empleados.Any(p => p.Nombre == empleado.Nombre && p.EmpleadoId != empleado.EmpleadoId);
         }
+
+        public void Agregar(Empleado empleado)
+        {
+            empleado.EmpleadoId = SetearEmpleadoId();
+            empleados.Add(empleado);
+            if (File.Exists(ruta))
+            {
+                var registros = File.ReadAllText(ruta);
+                if (!string.IsNullOrEmpty(registros) && !registros.EndsWith(Environment.NewLine))
+                {
+                    File.WriteAllText(ruta, Environment.NewLine);
+
+                }
+            }
+            using (var escritor = new StreamWriter(ruta, true))
+            {
+                string linea = ConstruirLinea(empleado);
+                escritor.WriteLine(linea);
+            }
+        }
+
+        public void Borrar(Empleado empleado)
+        {
+            Empleado? empleadoBorrar = empleados.FirstOrDefault(p => p.Nombre == empleado.Nombre);
+            if (empleadoBorrar is null)
+            {
+                return;
+            }
+            empleados.Remove(empleadoBorrar);
+
+            var registros = empleados.Select(p => ConstruirLinea(p)).ToArray();
+            File.WriteAllLines(ruta, registros);
+
+        }
+
+        public void Editar(Empleado empleado)
+        {
+            var empleadoEditado = empleados.FirstOrDefault(p => p.EmpleadoId == empleado.EmpleadoId);
+            if (empleadoEditado is null)
+            {
+                return;
+            }
+            empleadoEditado.Nombre = empleado.Nombre;
+            var registros = empleados.Select(p => ConstruirLinea(p)).ToArray();
+            File.WriteAllLines(ruta, registros);
+
+
+        }
+
+        private string ConstruirLinea(Empleado empleado)
+        {
+            return $"{empleado.EmpleadoId}|{empleado.Nombre}";
+        }
+
         public int GetCantidad()
         {
             return empleados.Count;

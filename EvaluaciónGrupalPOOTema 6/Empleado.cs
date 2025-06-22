@@ -6,6 +6,7 @@ namespace EvaluaciónGrupalPOOTema_6
     public class Empleado : IValidatableObject
     {
         public string Legajo { get; set; }
+        public int EmpleadoId { get; set; }
 
         public string Nombre { get; set; } = null!;
 
@@ -15,6 +16,10 @@ namespace EvaluaciónGrupalPOOTema_6
 
         public double Antiguedad;
 
+        public Empleado()
+        {
+            
+        }
         public Empleado(string legajo, string nombre, double antiguedad, DateTime fechaIngreso, double sueldoBase)
         {
             Legajo = legajo;

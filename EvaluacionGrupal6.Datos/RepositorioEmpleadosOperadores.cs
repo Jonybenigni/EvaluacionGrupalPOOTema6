@@ -9,7 +9,42 @@ namespace EvaluacionGrupal6.Datos
 {
     public class RepositorioEmpleadosOperadores
     {
+
         private List<Empleado> empleados = new List<Empleado>();
+
+        private readonly RepositorioEmpleadosLinq _empleadoRepositorio = null!;
+        public RepositorioEmpleadosOperadores(string ruta)
+        {
+            _empleadoRepositorio = new RepositorioEmpleadosLinq(ruta);
+        }
+
+        public void Borrar(Empleado empleado)
+        {
+            _empleadoRepositorio.Borrar(empleado);
+        }
+
+        public bool Existe(Empleado empleado)
+        {
+            return _empleadoRepositorio.Existe(empleado);
+        }
+
+        public List<Empleado> GetEmpleado()
+        {
+            return _empleadoRepositorio.GetEmpleado();
+        }
+
+        public void Guardar(Empleado empleado)
+        {
+            if (empleado.EmpleadoId == 0)
+            {
+                _empleadoRepositorio.Agregar(empleado);
+
+            }
+            else
+            {
+                _empleadoRepositorio.Editar(empleado);
+            }
+        }
 
         public static RepositorioEmpleadosOperadores operator +(RepositorioEmpleadosOperadores repo, Empleado e)
         {
