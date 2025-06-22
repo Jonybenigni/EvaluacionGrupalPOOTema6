@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluacionGrupal6.Datos", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluacionGrupal6.Utilidades", "EvaluacionGrupal6.Utilidades\EvaluacionGrupal6.Utilidades.csproj", "{6AEC5E0C-2A2F-473B-B305-8D313D2EAD5D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluacionGrupal6.Windows", "EvaluacionGrupal6.Windows\EvaluacionGrupal6.Windows.csproj", "{71855A86-384C-4BCD-94F1-D7E9C1CA9543}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6AEC5E0C-2A2F-473B-B305-8D313D2EAD5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AEC5E0C-2A2F-473B-B305-8D313D2EAD5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AEC5E0C-2A2F-473B-B305-8D313D2EAD5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71855A86-384C-4BCD-94F1-D7E9C1CA9543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71855A86-384C-4BCD-94F1-D7E9C1CA9543}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71855A86-384C-4BCD-94F1-D7E9C1CA9543}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71855A86-384C-4BCD-94F1-D7E9C1CA9543}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

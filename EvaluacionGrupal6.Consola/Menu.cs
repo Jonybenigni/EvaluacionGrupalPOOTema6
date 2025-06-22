@@ -28,8 +28,9 @@ namespace EvaluacionGrupal6.Consola
                 Console.WriteLine("6. Mostrar solo Seguridad");
                 Console.WriteLine("7. Mostrar solo Supervisores");
                 Console.WriteLine("8. Mostrar solo Operarios");
-                Console.WriteLine("9. Listar Operarios por turno");
-                Console.WriteLine("10. Mostrar estadísticas de los Empleados");
+                Console.WriteLine("9. Mostrar solo de Administrativos");
+                Console.WriteLine("10. Listar Operarios por turno");
+                Console.WriteLine("11. Mostrar estadísticas de los Empleados");
                 Console.WriteLine("0. Salir");
                 Console.Write("Opción: ");
                 opcion = int.Parse(Console.ReadLine());
@@ -44,8 +45,9 @@ namespace EvaluacionGrupal6.Consola
                     case 6: MostrarPorTipo(typeof(Seguridad)); break;
                     case 7: MostrarPorTipo(typeof(Supervisor)); break;
                     case 8: MostrarPorTipo(typeof(Operario)); break;
-                    case 9: MostrarOperariosPorTurno(); break;
-                    case 10: MostrarEstadisticas(); break;
+                    case 9: MostrarPorTipo(typeof(Administrativo)); break; 
+                    case 10: MostrarOperariosPorTurno(); break;
+                    case 11: MostrarEstadisticas(); break;
                 }
 
                 Console.WriteLine("\nPresione una tecla para continuar...");
@@ -58,15 +60,18 @@ namespace EvaluacionGrupal6.Consola
             Empleado s1 = new Seguridad("DO123", "Carlos Gómez", 10, new DateTime(2010, 5, 1), 70000, true);
             Empleado s2 = new Supervisor("DR456", "Laura Suárez", Supervisor.AreaEnum.Personal, 15, new DateTime(2005, 3, 10), 7000);
             Empleado s3 = new Operario("OP789", "Luis López", Operario.TurnoEnum.Noche, Operario.AdicionalTurnoEnum.Noche, 8, new DateTime(2015, 9, 20), 60000);
+            Empleado s4 = new Administrativo("AD001", "Ana Pérez", 5, new DateTime(2018, 1, 15), 50000,2);
 
             repoOperadores += s1;
             repoOperadores += s2;
             repoOperadores += s3;
+            repoOperadores += s4;
 
-           
+
             repoLinq.Agregar(s1);
             repoLinq.Agregar(s2);
             repoLinq.Agregar(s3);
+            repoLinq.Agregar(s4);
         }
 
         static void AltaPersonal()
@@ -92,7 +97,7 @@ namespace EvaluacionGrupal6.Consola
             Console.Write("Ingrese fecha de ingreso (yyyy-mm-dd): ");
             DateTime fechaIngreso = DateTime.Parse(Console.ReadLine());
 
-            Console.WriteLine("Tipo de empleado: 1-Seguridad, 2-Supervisor, 3-Operario");
+            Console.WriteLine("Tipo de empleado: 1-Seguridad, 2-Supervisor, 3-Operario, 4-Administrativo");
             int tipo = int.Parse(Console.ReadLine());
 
             Empleado nuevo = null!;
@@ -115,6 +120,13 @@ namespace EvaluacionGrupal6.Consola
                     Console.WriteLine("Seleccione adicional: 0-Mañana, 1-Tarde, 2-Noche");
                     var adicional = (Operario.AdicionalTurnoEnum)int.Parse(Console.ReadLine());
                     nuevo = new Operario(legajo, nombre, turno, adicional, antiguedad, fechaIngreso, sueldoBase);
+                    break;
+                case 4:
+                    Console.Write("Ingrese cantidad de horas extras: ");
+                    double horasExtras = double.Parse(Console.ReadLine());
+                    var admin = new Administrativo(legajo, nombre, antiguedad, fechaIngreso, sueldoBase, horasExtras);
+                    admin.HorasExtras = horasExtras;
+                    nuevo = admin;
                     break;
             }
 
@@ -175,6 +187,12 @@ namespace EvaluacionGrupal6.Consola
 
                 Console.Write("Nueva fecha ingreso (yyyy-mm-dd): ");
                 emp.FechaIngreso = DateTime.Parse(Console.ReadLine());
+
+                if (emp is Administrativo admin)
+                {
+                    Console.Write("Nueva cantidad de horas extras: ");
+                    admin.HorasExtras = double.Parse(Console.ReadLine());
+                }
 
                 Console.WriteLine("Modificación realizada.");
             }
@@ -245,6 +263,9 @@ namespace EvaluacionGrupal6.Consola
 
             if (emp is Seguridad s)
                 Console.Write($", Usa arma: {(s.TieneArma ? "Sí" : "No")}");
+
+            if (emp is Administrativo a)
+                Console.Write($", Horas extras: {a.HorasExtras}");
 
             Console.WriteLine();
         }
