@@ -1,4 +1,4 @@
-
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35818.85
@@ -10,8 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluacionGrupal6.Datos", "EvaluacionGrupal6.Datos\EvaluacionGrupal6.Datos.csproj", "{03FF3582-CA40-47D9-906F-2099F8577CA0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluacionGrupal6.Utilidades", "EvaluacionGrupal6.Utilidades\EvaluacionGrupal6.Utilidades.csproj", "{6AEC5E0C-2A2F-473B-B305-8D313D2EAD5D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluacionGrupal6.Windows", "EvaluacionGrupal6.Windows\EvaluacionGrupal6.Windows.csproj", "{7FCAB488-9E6C-458F-9EFD-26ED913B05DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{6AEC5E0C-2A2F-473B-B305-8D313D2EAD5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AEC5E0C-2A2F-473B-B305-8D313D2EAD5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AEC5E0C-2A2F-473B-B305-8D313D2EAD5D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7FCAB488-9E6C-458F-9EFD-26ED913B05DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7FCAB488-9E6C-458F-9EFD-26ED913B05DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7FCAB488-9E6C-458F-9EFD-26ED913B05DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7FCAB488-9E6C-458F-9EFD-26ED913B05DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

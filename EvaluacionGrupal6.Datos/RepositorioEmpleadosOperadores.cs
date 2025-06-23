@@ -18,6 +18,10 @@ namespace EvaluacionGrupal6.Datos
             _empleadoRepositorio = new RepositorioEmpleadosLinq(ruta);
         }
 
+        public RepositorioEmpleadosOperadores()
+        {
+        }
+
         public void Borrar(Empleado empleado)
         {
             _empleadoRepositorio.Borrar(empleado);

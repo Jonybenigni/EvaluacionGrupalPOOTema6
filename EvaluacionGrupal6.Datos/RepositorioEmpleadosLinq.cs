@@ -6,13 +6,16 @@ namespace EvaluacionGrupal6.Datos
     {
         private List<Empleado> empleados = new();
         
-        private readonly string ruta = null!;
-
+        public string ruta = "Empleados.txt";
 
         public RepositorioEmpleadosLinq(string rutaArchivo)
         {
             ruta = rutaArchivo;
             LeerDatos();
+        }
+
+        public RepositorioEmpleadosLinq()
+        {
         }
 
         public List<Empleado> GetEmpleado()
@@ -54,8 +57,16 @@ namespace EvaluacionGrupal6.Datos
 
         private int SetearEmpleadoId()
         {
-            return empleados.Max(p => p.EmpleadoId) + 1;
+            if (empleados.Any())
+            {
+                return empleados.Max(p => p.EmpleadoId) + 1;
+            }
+            else
+            {
+                return 1;
+            }
         }
+
 
         public bool Existe(Empleado empleado)
         {
