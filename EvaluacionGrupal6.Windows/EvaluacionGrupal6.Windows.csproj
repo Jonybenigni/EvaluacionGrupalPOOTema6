@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -8,8 +8,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
-  <ItemGroup>
+ <ItemGroup>
     <ProjectReference Include="..\EvaluacionGrupal6.Datos\EvaluacionGrupal6.Datos.csproj" />
+    <ProjectReference Include="..\EvaluaciónGrupalPOOTema 6\EvaluaciónGrupal6.Entidades.csproj" />
   </ItemGroup>
 
   <ItemGroup>

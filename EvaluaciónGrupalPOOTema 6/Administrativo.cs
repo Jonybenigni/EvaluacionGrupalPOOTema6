@@ -13,13 +13,13 @@ namespace EvaluaciónGrupalPOOTema_6
         public double PrecioPorHoraExtra { get; set; } = 2000; 
 
 
-        public Administrativo(string legajo, string nombre, double antiguedad, DateTime fechaIngreso, double sueldoBase) : base(legajo, nombre, antiguedad, fechaIngreso, sueldoBase)
+        public Administrativo(string legajo, string nombre, double antiguedad, DateTime fechaIngreso, double sueldoBase, double horasExtras) : base(legajo, nombre, antiguedad, fechaIngreso, sueldoBase)
         {
-
+            HorasExtras = horasExtras;
 
         }
 
-        public new double CalcularSueldo()
+        public override double CalcularSueldo()
         {
             return SueldoBase + (HorasExtras*PrecioPorHoraExtra);
         }
